@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#f4f5f7">
+<title>BIM1_oefenbestand_les6.rvt</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; background: #f4f5f7; color: #222; }
+  .screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+  .screen.active { display: flex; }
+
+  /* ---------- 1. LOKAAS ---------- */
+  #bait .card { background: #fff; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); padding: 28px 22px; width: 100%; max-width: 360px; text-align: center; }
+  #bait .icon { width: 64px; height: 76px; margin: 0 auto 16px; background: #2b6cb0; border-radius: 6px; position: relative; color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; }
+  #bait .icon::after { content: ""; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 16px 16px 0; border-color: transparent #f4f5f7 #90b4df transparent; }
+  #bait h1 { font-size: 17px; word-break: break-all; margin-bottom: 4px; }
+  #bait .meta { font-size: 13px; color: #888; margin-bottom: 22px; }
+  #bait button { width: 100%; padding: 14px; font-size: 16px; font-weight: 600; border: 0; border-radius: 10px; background: #2b6cb0; color: #fff; }
+  #bait .small { font-size: 11px; color: #aaa; margin-top: 14px; }
+
+  /* ---------- 2. PANIEK ---------- */
+  #panic { background: #000; color: #ff2a2a; font-family: "Courier New", monospace; justify-content: flex-start; padding-top: 40px; }
+  #panic.flash { animation: flash .25s steps(2) infinite; }
+  @keyframes flash { 0% { background: #000; } 50% { background: #5a0000; } }
+  #panic .warn { font-size: 54px; animation: shake .15s infinite; }
+  #panic h2 { font-size: 22px; text-align: center; margin: 8px 0 4px; text-transform: uppercase; letter-spacing: 1px; }
+  #panic .glitch { position: relative; }
+  #panic .glitch::before, #panic .glitch::after { content: attr(data-text); position: absolute; left: 0; right: 0; }
+  #panic .glitch::before { color: #0ff; transform: translate(-2px, 0); clip-path: inset(0 0 55% 0); animation: gl 0.4s infinite; }
+  #panic .glitch::after { color: #ff0; transform: translate(2px, 0); clip-path: inset(55% 0 0 0); animation: gl 0.3s infinite reverse; }
+  @keyframes gl { 0%{transform:translate(-3px,1px)} 50%{transform:translate(3px,-1px)} 100%{transform:translate(-1px,2px)} }
+  @keyframes shake { 0%{transform:translate(0,0) rotate(0)} 25%{transform:translate(-3px,2px) rotate(-3deg)} 75%{transform:translate(3px,-2px) rotate(3deg)} }
+  #count { font-size: 15px; margin-bottom: 14px; }
+  #count b { font-size: 26px; color: #fff; }
+  .bar { width: 100%; max-width: 360px; height: 14px; border: 1px solid #ff2a2a; margin-bottom: 16px; }
+  .bar div { height: 100%; width: 0; background: #ff2a2a; transition: width .2s linear; }
+  #term { width: 100%; max-width: 380px; flex: 1; overflow: hidden; font-size: 12px; line-height: 1.55; color: #33ff66; }
+  #term .err { color: #ff2a2a; }
+  #wipe { font-size: 20px; color: #fff; margin: 10px 0 20px; min-height: 28px; text-align: center; }
+
+  /* ---------- 3. ONTKNOPING ---------- */
+  #reveal { background: #1a0f2e; color: #fff; text-align: center; overflow: hidden; }
+  .skel { font-size: 110px; animation: dance .5s ease-in-out infinite alternate; display: inline-block; }
+  @keyframes dance { 0% { transform: rotate(-15deg) translateY(0); } 100% { transform: rotate(15deg) translateY(-18px); } }
+  .pumpkins { font-size: 38px; margin: 6px 0 14px; }
+  .pumpkins span { display: inline-block; animation: dance .4s ease-in-out infinite alternate; }
+  .pumpkins span:nth-child(2) { animation-delay: .2s; }
+  .pumpkins span:nth-child(3) { animation-delay: .1s; }
+  #reveal h2 { font-size: 26px; color: #ff9a1f; margin-bottom: 6px; }
+  #reveal p.sub { font-size: 16px; opacity: .9; margin-bottom: 22px; }
+  .lesson { background: rgba(255,255,255,.08); border-left: 4px solid #ff9a1f; border-radius: 8px; padding: 14px 16px; text-align: left; font-size: 14px; line-height: 1.5; max-width: 380px; }
+  .lesson b { color: #ff9a1f; }
+  #again { margin-top: 18px; background: none; border: 1px solid #ff9a1f; color: #ff9a1f; padding: 9px 18px; border-radius: 8px; font-size: 14px; }
+  .bat { position: absolute; font-size: 28px; animation: fly linear infinite; }
+  @keyframes fly { from { transform: translateX(-60px); } to { transform: translateX(110vw); } }
+</style>
+</head>
+<body>
+
+<!-- 1. LOKAAS -->
+<section id="bait" class="screen active">
+  <div class="card">
+    <div class="icon">RVT</div>
+    <h1>BIM1_oefenbestand_les6.rvt</h1>
+    <div class="meta">48,2 MB · gedeeld bestand</div>
+    <button id="go">⬇ Downloaden</button>
+    <div class="small">Bestandsvoorbeeld niet beschikbaar op mobiel</div>
+  </div>
+</section>
+
+<!-- 2. PANIEK -->
+<section id="panic" class="screen">
+  <div class="warn">☠️</div>
+  <h2 class="glitch" data-text="Systeem gecompromitteerd">Systeem gecompromitteerd</h2>
+  <div id="count">Bedreigingen gevonden: <b id="n">0</b></div>
+  <div class="bar"><div id="prog"></div></div>
+  <div id="wipe"></div>
+  <div id="term"></div>
+</section>
+
+<!-- 3. ONTKNOPING -->
+<section id="reveal" class="screen">
+  <div class="skel">💀</div>
+  <div class="pumpkins"><span>🎃</span><span>🦇</span><span>🎃</span></div>
+  <h2>Happy Halloween!</h2>
+  <p class="sub">Je bent gehackt… door je docent. 😈<br>Je gsm is in orde, je hartslag misschien iets minder.</p>
+  <div class="lesson">
+    <b>Wat ging er net mis?</b><br>
+    Je scande een onbekende QR-code en tikte zonder nadenken op "Downloaden". Dat heet <b>quishing</b>: phishing via QR-codes.
+    Een echte aanvaller had hier een nagemaakte loginpagina gezet om je wachtwoord te vangen.<br><br>
+    <b>Tip:</b> kijk altijd eerst naar de URL voordat je iets opent of invult.
+  </div>
+  <button id="again">↻ Nog eens (bij een klasgenoot 😉)</button>
+</section>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const show = id => document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
+  let ctx, alarmTimer;
+  const timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+  // Alarmgeluid via Web Audio (geen audiobestanden nodig)
+  function startAlarm() {
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      ctx.resume();
+      let high = true;
+      alarmTimer = setInterval(() => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'square';
+        o.frequency.value = high ? 880 : 620;
+        g.gain.setValueAtTime(0.08, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+        o.connect(g).connect(ctx.destination);
+        o.start(); o.stop(ctx.currentTime + 0.23);
+        high = !high;
+      }, 250);
+    } catch (e) {}
+  }
+  function stopAlarm() { clearInterval(alarmTimer); }
+
+  // Vrolijk deuntje bij de ontknoping
+  function jingle() {
+    if (!ctx) return;
+    const notes = [523, 659, 784, 1047, 784, 1047];
+    notes.forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime + i * 0.13;
+      o.type = 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.12, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+      o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.13);
+    });
+  }
+
+  const vibrate = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
+
+  const lines = [
+    ['> Verbinding met 666.13.13.31 ...', ''],
+    ['> Toegang verkregen ✓', ''],
+    ['> Contacten kopiëren: 312 gevonden', ''],
+    ['> Selfies uploaden: 4.718 / 4.718', ''],
+    ['!! Trojan.Pumpkin.exe gedetecteerd', 'err'],
+    ['> Zoekgeschiedenis doorsturen naar docent ...', ''],
+    ['> Revit-licentie omzetten naar SketchUp Free ...', ''],
+    ['!! Worm.Skeleton.BIM gedetecteerd', 'err'],
+    ['> Batterij herprogrammeren naar 1% ...', ''],
+    ['> Groepschat "Toegepaste Architectuur" infiltreren ...', ''],
+    ['!! Kritieke fout: SNOEP.dll ontbreekt', 'err'],
+    ['> Volledige wis voorbereiden ...', 'err'],
+  ];
+
+  function runPanic() {
+    show('panic');
+    $('panic').classList.add('flash');
+    try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(() => {}); } catch (e) {}
+    startAlarm();
+    vibrate([300, 100, 300, 100, 600, 200, 300, 100, 300]);
+
+    const term = $('term'); term.innerHTML = '';
+    lines.forEach(([txt, cls], i) => later(() => {
+      const d = document.createElement('div'); d.textContent = txt; if (cls) d.className = cls;
+      term.appendChild(d);
+    }, 400 + i * 550));
+
+    let n = 0;
+    const counter = setInterval(() => { n += Math.floor(Math.random() * 60) + 15; $('n').textContent = Math.min(n, 666); }, 120);
+    timers.push(counter);
+    let p = 0;
+    const prog = setInterval(() => { p = Math.min(p + 1.4, 100); $('prog').style.width = p + '%'; }, 100);
+    timers.push(prog);
+
+    [5, 4, 3, 2, 1].forEach((s, i) => later(() => {
+      $('wipe').textContent = `Toestel wordt gewist in ${s}…`; vibrate(200);
+    }, 7000 + i * 1000));
+    later(() => { clearInterval(counter); $('n').textContent = 666; }, 6500);
+    later(reveal, 12000);
+  }
+
+  function reveal() {
+    timers.forEach(t => { clearTimeout(t); clearInterval(t); }); timers.length = 0;
+    stopAlarm(); vibrate(0);
+    $('panic').classList.remove('flash');
+    show('reveal');
+    jingle();
+    // vleermuizen
+    document.querySelectorAll('.bat').forEach(b => b.remove());
+    for (let i = 0; i < 5; i++) {
+      const b = document.createElement('div'); b.className = 'bat'; b.textContent = '🦇';
+      b.style.top = (5 + Math.random() * 85) + '%';
+      b.style.animationDuration = (4 + Math.random() * 5) + 's';
+      b.style.animationDelay = (-Math.random() * 5) + 's';
+      $('reveal').appendChild(b);
+    }
+  }
+
+  $('go').addEventListener('click', runPanic);
+  $('again').addEventListener('click', () => { $('wipe').textContent = ''; $('prog').style.width = 0; $('n').textContent = 0; show('bait'); });
+})();
+</script>
+</body>
+</html>
